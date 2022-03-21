@@ -1,4 +1,5 @@
-﻿using BilgeAdam.Data.Abstractions;
+﻿using BilgeAdam.ADONET.LoginPage.Extensions;
+using BilgeAdam.Data.Abstractions;
 using BilgeAdam.Data.Concretes;
 using BilgeAdam.Data.Dtos;
 using System.ComponentModel;
@@ -73,7 +74,7 @@ namespace BilgeAdam.ADONET.LoginPage
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            
+
             PageIndex++;
             LoadProducts();
         }
@@ -81,6 +82,25 @@ namespace BilgeAdam.ADONET.LoginPage
         {
             LoadProducts();
         }
+
+
+        private void cmsDelete_Click(object sender, EventArgs e)
+        {
+            //TODO : will develop
+        }
+
+        private void cmsEdit_Click(object sender, EventArgs e)
+        {
+            this.Switch(new frmEditProduct());
+            this.Show();
+        }
+
+        private void msAddProduct_Click(object sender, EventArgs e)
+        {
+            this.Switch(new frmAddProduct(service));
+            this.Show();
+        }
+
 
         #region HelperMethods
         private void MapperProduct(SqlDataReader reader)
@@ -98,6 +118,9 @@ namespace BilgeAdam.ADONET.LoginPage
             });
         }
 
+
         #endregion
+
+
     }
 }

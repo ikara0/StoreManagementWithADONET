@@ -44,7 +44,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PlaceholderText = "Password";
             this.txtPassword.Size = new System.Drawing.Size(169, 23);
-            this.txtPassword.TabIndex = 0;
+            this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label1
@@ -62,7 +62,7 @@
             this.txtPasswordAgain.Name = "txtPasswordAgain";
             this.txtPasswordAgain.PlaceholderText = "Password Again";
             this.txtPasswordAgain.Size = new System.Drawing.Size(169, 23);
-            this.txtPasswordAgain.TabIndex = 0;
+            this.txtPasswordAgain.TabIndex = 2;
             this.txtPasswordAgain.UseSystemPasswordChar = true;
             // 
             // label2
@@ -80,7 +80,7 @@
             this.btnSave.Location = new System.Drawing.Point(122, 141);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(91, 23);
-            this.btnSave.TabIndex = 2;
+            this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
