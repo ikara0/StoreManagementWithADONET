@@ -1,5 +1,7 @@
-﻿using BilgeAdam.Data.Entities;
+﻿using BilgeAdam.Data.Dtos;
+using BilgeAdam.Data.Entities;
 using Dapper;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -30,6 +32,14 @@ namespace BilgeAdam.Data
             return result.ToList();
         }
 
+        public List<ComboBoxItemDto> GetCategoriesWithDapper(string query)
+        {
+            OpenConnection();
+            var result = connection.Query<ComboBoxItemDto>(query);
+            CloseConnection();
+            return result.ToList();
+        }
+
         public int GetTotalCountWithDapper(string query)
         {
             OpenConnection();
@@ -56,6 +66,15 @@ namespace BilgeAdam.Data
             return result;
         }
 
+        public List<ComboBoxItemDto> GetSuppliersWithDapper(string query)
+        {
+
+            OpenConnection();
+            var result = connection.Query<ComboBoxItemDto>(query);
+            CloseConnection();
+            return result.ToList();
+        }
+
         public void GetOffSetProduct(string query, Action<SqlDataReader> mapperProduct)
         {
             OpenConnection();
@@ -69,6 +88,7 @@ namespace BilgeAdam.Data
             }
             CloseConnection();
         }
+
 
         private void CloseConnection()
         {

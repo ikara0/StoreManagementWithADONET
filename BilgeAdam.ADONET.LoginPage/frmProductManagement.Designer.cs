@@ -40,6 +40,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.grpFilter = new System.Windows.Forms.GroupBox();
+            this.btnClear = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbSuppliers = new System.Windows.Forms.ComboBox();
@@ -76,14 +77,14 @@
             // cmsDelete
             // 
             this.cmsDelete.Name = "cmsDelete";
-            this.cmsDelete.Size = new System.Drawing.Size(180, 22);
+            this.cmsDelete.Size = new System.Drawing.Size(107, 22);
             this.cmsDelete.Text = "Delete";
             this.cmsDelete.Click += new System.EventHandler(this.cmsDelete_Click);
             // 
             // cmsEdit
             // 
             this.cmsEdit.Name = "cmsEdit";
-            this.cmsEdit.Size = new System.Drawing.Size(180, 22);
+            this.cmsEdit.Size = new System.Drawing.Size(107, 22);
             this.cmsEdit.Text = "Edit";
             this.cmsEdit.Click += new System.EventHandler(this.cmsEdit_Click);
             // 
@@ -147,6 +148,7 @@
             // 
             // grpFilter
             // 
+            this.grpFilter.Controls.Add(this.btnClear);
             this.grpFilter.Controls.Add(this.label4);
             this.grpFilter.Controls.Add(this.label3);
             this.grpFilter.Controls.Add(this.cmbSuppliers);
@@ -158,10 +160,20 @@
             this.grpFilter.TabStop = false;
             this.grpFilter.Text = "Filtre";
             // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(649, 13);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(70, 23);
+            this.btnClear.TabIndex = 5;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(389, 16);
+            this.label4.Location = new System.Drawing.Point(357, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 15);
             this.label4.TabIndex = 4;
@@ -178,19 +190,23 @@
             // 
             // cmbSuppliers
             // 
+            this.cmbSuppliers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSuppliers.FormattingEnabled = true;
-            this.cmbSuppliers.Location = new System.Drawing.Point(450, 11);
+            this.cmbSuppliers.Location = new System.Drawing.Point(418, 11);
             this.cmbSuppliers.Name = "cmbSuppliers";
             this.cmbSuppliers.Size = new System.Drawing.Size(216, 23);
             this.cmbSuppliers.TabIndex = 3;
+            this.cmbSuppliers.SelectedIndexChanged += new System.EventHandler(this.cmbSuppliers_SelectedIndexChanged);
             // 
             // cmbCategories
             // 
+            this.cmbCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategories.FormattingEnabled = true;
             this.cmbCategories.Location = new System.Drawing.Point(83, 13);
             this.cmbCategories.Name = "cmbCategories";
             this.cmbCategories.Size = new System.Drawing.Size(216, 23);
             this.cmbCategories.TabIndex = 3;
+            this.cmbCategories.SelectedIndexChanged += new System.EventHandler(this.cmbCategories_SelectedIndexChanged);
             // 
             // msProducts
             // 
@@ -213,7 +229,7 @@
             // msAddProduct
             // 
             this.msAddProduct.Name = "msAddProduct";
-            this.msAddProduct.Size = new System.Drawing.Size(180, 22);
+            this.msAddProduct.Size = new System.Drawing.Size(141, 22);
             this.msAddProduct.Text = "Add Product";
             this.msAddProduct.Click += new System.EventHandler(this.msAddProduct_Click);
             // 
@@ -270,5 +286,6 @@
         private ContextMenuStrip cmsProduct;
         private ToolStripMenuItem cmsDelete;
         private ToolStripMenuItem cmsEdit;
+        private Button btnClear;
     }
 }
