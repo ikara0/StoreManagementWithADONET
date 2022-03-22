@@ -91,7 +91,20 @@ namespace BilgeAdam.ADONET.LoginPage
 
         private void cmsDelete_Click(object sender, EventArgs e)
         {
-            //TODO : will develop
+            var product = (int)dgvProducts.CurrentRow.Cells[0].Value;
+
+            var result = service.DeleteProduct(product);
+
+            if (result)
+            {
+                MessageBox.Show("Product Deleted", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadProducts();
+            }
+            else
+            {
+                MessageBox.Show("Product could not be Deleted", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void cmsEdit_Click(object sender, EventArgs e)
@@ -110,6 +123,8 @@ namespace BilgeAdam.ADONET.LoginPage
         {
             cmbCategories.SelectedIndex = 0;
             cmbSuppliers.SelectedIndex = 0;
+            supplierID = 0;
+            categoryID = 0; 
             LoadProducts();
         }
 

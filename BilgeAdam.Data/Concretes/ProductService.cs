@@ -20,6 +20,29 @@ namespace BilgeAdam.Data.Concretes
             databaseManager = new DatabaseManager();   
         }
 
+        public bool CreateProduct(NewProductDto productDto)
+        {
+            var query = @$"INSERT INTO Products (ProductName,
+                                                 UnitPrice,
+                                                 UnitsInStock,
+                                                 CategoryID,
+                                                 SupplierID) 
+                                        VALUES
+                                                ('{productDto.Name}',
+                                                  {productDto.UnitPrice},
+                                                  {productDto.UnitsInStock},
+                                                  {productDto.CategoryID},
+                                                  {productDto.SupplierID})";
+            return databaseManager.Created(query);
+        }
+
+        public bool DeleteProduct(int product)
+        {
+            var query = $"DELETE FROM Products WHERE ProductID = {product}";
+            return databaseManager.DeleteProduct(query);
+
+        }
+
         public List<Product> GetAllProduct()
         {
             var query = "SELECT * FROM Products";

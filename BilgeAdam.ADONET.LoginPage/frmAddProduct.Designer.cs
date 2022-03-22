@@ -123,9 +123,19 @@
             0,
             0,
             0});
+            this.nudPrice.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
             this.nudPrice.Name = "nudPrice";
             this.nudPrice.Size = new System.Drawing.Size(218, 23);
             this.nudPrice.TabIndex = 2;
+            this.nudPrice.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
             // 
             // nudUnitsInStock
             // 

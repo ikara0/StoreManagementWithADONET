@@ -56,6 +56,23 @@ namespace BilgeAdam.Data
             }
         }
 
+        public bool DeleteProduct(string query)
+        {
+            OpenConnection();
+            var command = new SqlCommand(query, connection);
+            var result = command.ExecuteNonQuery();
+            CloseConnection();
+            return result > 0;
+        }
+        public bool Created(string query)
+        {
+            OpenConnection();
+            var command = new SqlCommand(query, connection);
+            var result = command.ExecuteNonQuery();
+            CloseConnection();
+            return result > 0;
+        }
+
         public TResult GetAll<TResult>(string tablename, Func<SqlDataReader, TResult> securityQuestionMapper)
         {
             OpenConnection();
@@ -98,14 +115,6 @@ namespace BilgeAdam.Data
             }
         }
 
-        public bool Created(string query)
-        {
-            OpenConnection();
-            var command = new SqlCommand(query, connection);
-            var result = command.ExecuteNonQuery();
-            CloseConnection();
-            return result > 0;
-        }
 
         public bool ExecuteWithParameter(string query, SqlParameter[] sqlParameters)
         {
