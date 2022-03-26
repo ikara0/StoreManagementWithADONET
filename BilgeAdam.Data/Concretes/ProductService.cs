@@ -99,6 +99,16 @@ namespace BilgeAdam.Data.Concretes
             return databaseManager.GetTotalCountWithDapper(query);
         }
 
-        
+        public bool UpdateProduct(ProductDto product, ComboBoxItemDto selectedCategory, ComboBoxItemDto selectedSupplier)
+        {
+            var query = $@"UPDATE Products SET 
+                                           ProductName ='{product.Name}',
+                                           UnitPrice ={product.Price},
+                                           UnitsInStock ={product.Stock},
+                                           CategoryID ={selectedCategory.ID},
+                                           SupplierID ={selectedSupplier.ID}
+                                  WHERE ProductID ={product.Id}";
+            return databaseManager.UpdateProductWithDapper(query);
+        }
     }
 }

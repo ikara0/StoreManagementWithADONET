@@ -144,5 +144,13 @@ namespace BilgeAdam.Data
             CloseConnection();
             return result > 0;
         }
+
+        public bool UpdateProductWithDapper(string query)
+        {
+            OpenConnection();
+            var result = connection.Execute(query);
+            CloseConnection();
+            return result > 0;
+        }
     }
 }

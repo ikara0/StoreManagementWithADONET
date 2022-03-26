@@ -109,7 +109,12 @@ namespace BilgeAdam.ADONET.LoginPage
 
         private void cmsEdit_Click(object sender, EventArgs e)
         {
-            this.Switch(new frmEditProduct());
+            var selected = dgvProducts.SelectedRows[0].DataBoundItem as ProductDto;
+            if(selected == null)
+            {
+                return;
+            }
+            this.Switch(new frmEditProduct(selected, service));
             this.Show();
         }
 

@@ -15,5 +15,6 @@ namespace BilgeAdam.Data.Abstractions
         void GetFilterData(string query, Action<SqlDataReader> mapperProduct);
         bool CreateProduct(NewProductDto productDto);
         bool DeleteProduct(int product);
+        bool UpdateProduct(ProductDto product, ComboBoxItemDto selectedCategory, ComboBoxItemDto selectedSupplier);
     }
 }
