@@ -15,14 +15,6 @@ namespace BilgeAdam.Data
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["LocalConnection"].ConnectionString);
         }
-        public bool Any(string query)
-        {
-            OpenConnection();
-            var command = new SqlCommand(query, connection);
-            var result = command.ExecuteScalar();
-            CloseConnection();
-            return result is not null;
-        }
 
         public List<Product> GetAllWithDapper(string query)
         {
@@ -38,6 +30,16 @@ namespace BilgeAdam.Data
             var result = connection.Query<ComboBoxItemDto>(query);
             CloseConnection();
             return result.ToList();
+        }
+
+        public TResult Any<TResult>(string query, Func<SqlDataReader, TResult> userIsActiveMapper)
+        {
+            OpenConnection();
+            var command = new SqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+            var result = userIsActiveMapper(reader);
+            CloseConnection();
+            return result;
         }
 
         public int GetTotalCountWithDapper(string query)
@@ -151,6 +153,13 @@ namespace BilgeAdam.Data
             var result = connection.Execute(query);
             CloseConnection();
             return result > 0;
+        }
+
+        public void Bloked(string query)
+        {
+            OpenConnection();
+            connection.Execute(query);
+            CloseConnection();
         }
     }
 }

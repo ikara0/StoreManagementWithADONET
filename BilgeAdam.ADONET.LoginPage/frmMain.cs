@@ -19,8 +19,7 @@ namespace BilgeAdam.ADONET.LoginPage
         {
             var dto = new CheckUserDto { Email = txtEmail.Text, Password = txtPassWord.Text};  
             var result = service.CheckUser(dto);
-            
-            if (result)
+            if (result.IsActive)
             {
                 MessageBox.Show("Giriş Başarılı :)", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Switch(new frmProductManagement());

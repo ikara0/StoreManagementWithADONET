@@ -18,30 +18,16 @@ namespace BilgeAdam.Data.Concretes
         {
             databaseManager = new DatabaseManager();
         }
-        public bool CheckUser( CheckUserDto dto)
+        public CheckUserDto CheckUser( CheckUserDto dto)
         {
             var hashPassword = dto.Password + ConstraintStrings.PasswordKey;
-            var query = $"SELECT Id FROM Users WHERE Email = '{dto.Email}' AND Password = '{hashPassword.ComputeHash()}'";
-            return databaseManager.Any(query);
-        }
+            var query = $"SELECT Email,Password,isActive FROM Users WHERE Email = '{dto.Email}' AND Password = '{hashPassword.ComputeHash()}'";
 
+            return databaseManager.Any(query,UserIsActiveMapper);
+        }
         public List<SecurityQuestionOptionDto> GetSecurityQuestions()
         {
             return databaseManager.GetAll("SecurityQuestions", SecurityQuestionMapper);
-        }
-
-        private List<SecurityQuestionOptionDto> SecurityQuestionMapper(SqlDataReader reader)
-        {
-            var result = new List<SecurityQuestionOptionDto>();
-            while (reader.Read())
-            {
-                result.Add(new SecurityQuestionOptionDto
-                {
-                    Id = reader.GetInt32(0),
-                    Question = reader.GetString(1),
-                });
-            }
-            return result;  
         }
 
         public bool RegisterUser(NewUserDto dto)
@@ -55,7 +41,8 @@ namespace BilgeAdam.Data.Concretes
                                               GETDATE(),
                                              'Admin',
                                              {dto.SecurityQuestionId},
-                                             '{dto.Answer}')";
+                                             '{dto.Answer}',
+                                             1)";
             return databaseManager.Created(query);
         }
         
@@ -91,6 +78,14 @@ namespace BilgeAdam.Data.Concretes
             var query = $"UPDATE Users SET Password = '{hashPassword.ComputeHash()}' WHERE Id = {dto.UserId}";
             return databaseManager.Update(query);
         }
+
+        public void BlokeTheUser(UserQuestionDto user)
+        {
+            var query = $@"UPDATE Users SET isActive = 0 WHERE ID = {user.Id} ";
+            databaseManager.Bloked(query);
+        }
+
+        #region MapperFunctions
         private UserQuestionDto UserQuestionMapper(SqlDataReader reader)
         {
             while (reader.Read())
@@ -104,5 +99,33 @@ namespace BilgeAdam.Data.Concretes
             }
             return null;
         }
+        private List<SecurityQuestionOptionDto> SecurityQuestionMapper(SqlDataReader reader)
+        {
+            var result = new List<SecurityQuestionOptionDto>();
+            while (reader.Read())
+            {
+                result.Add(new SecurityQuestionOptionDto
+                {
+                    Id = reader.GetInt32(0),
+                    Question = reader.GetString(1),
+                });
+            }
+            return result;  
+        }
+        private CheckUserDto UserIsActiveMapper(SqlDataReader reader)
+        {
+            while (reader.Read())
+            {
+                return new CheckUserDto
+                {
+                    Email = reader.GetString(0),
+                    Password = reader.GetString(1),
+                    IsActive = reader.GetBoolean(2),
+                };
+            }
+            return null;
+        }
+
+        #endregion
     }
 }
